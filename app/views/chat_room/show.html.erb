@@ -1,0 +1,22 @@
+<h1> <%= @chat_room.title %></h1>
+
+<%= render partial: 'messages/form'%>
+
+<table class="table table-striped sortable <%="msgs-chat-room-#{@chat_room.id.to_s}"%>">
+  <thead>
+    <tr>
+      <th>user</th>
+      <th>message</th>
+    </tr>
+  </thead>
+
+ <tbody>
+   <% if @messages.present? %>
+      <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.content %></td>
+          <td><%= message.user.name %></td>
+        </tr>
+      <% end %>
+   <% end %>
+ </tbody>

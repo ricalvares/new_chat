@@ -4,16 +4,27 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.create(msg_params)
+    # CreateMessageJob.perform_later(
+    #   content: message_params[:content],
+    #   user_id: message_params[:user_id],
+    #   chat_room_id: message_params[:chat_room_id]
+    # )
 
+    message = Message.new(message_params)
     if @message.save
+      data = {
+        message: message.content,
+        creator: message.user.name,
+        room_id: 1
+      }
       ActionCable.server.broadcast 'room_channel', content: @message.content
+      ActionCable.server.broadcast 'chat_rooom_channel', message: data
     end
   end
 
   private
 
-  def msg_params
-    params.require(:message).permit(:content)
+  def message_params
+    params.require(:message).permit(:content, :user_id, :chat_room_id)
   end
 end
