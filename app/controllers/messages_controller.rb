@@ -10,15 +10,15 @@ class MessagesController < ApplicationController
     #   chat_room_id: message_params[:chat_room_id]
     # )
 
-    message = Message.new(message_params)
+    @message = Message.new(message_params.except(:chat_room_id))
     if @message.save
       data = {
-        message: message.content,
-        creator: message.user.name,
+        message: @message.content,
+        creator: @message.user.name,
         room_id: 1
       }
-      ActionCable.server.broadcast 'room_channel', content: @message.content
       ActionCable.server.broadcast 'chat_rooom_channel', message: data
+      ActionCable.server.broadcast 'room_channel', content: @message.content
     end
   end
 

@@ -11,8 +11,7 @@ consumer.subscriptions.create("ChatRoomChannel", {
   },
 
   received(data) {
-    console.log(data)
-    debugger
+    console.log("CHAT ROOM: ", data)
     $(`.msgs-chat-room-${data.room_id} > tbody`).append(
       `<tr>
         <td>${data.message}</td>
