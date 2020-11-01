@@ -38,7 +38,7 @@ RSpec.describe CreateMessageJob, type: :job do
         let(:user_id) { 0 }
 
         it 'does not create a message' do
-          expect { run_job }.to_not change(Message,:count)
+          expect { run_job }.to_not change(Message, :count)
         end
 
         it 'does not broadcast' do
