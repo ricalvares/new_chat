@@ -21,7 +21,7 @@ class ChatRoomController < ApplicationController
   def show
     @message = Message.new
     @messages = Message.all
-    @chat_room = ChatRoom.find(params[:id])
+    @chat_room = ChatRoom.find_by(id: params[:id])
   end
 
   private

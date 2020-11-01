@@ -11,29 +11,13 @@ consumer.subscriptions.create("ChatRoomChannel", {
   },
 
   received(data) {
-    console.log("CHAT ROOM: ", data)
-    $(`.msgs-chat-room-${data.room_id} > tbody`).append(
+    const msg = data.message
+    $(`.msgs-chat-room-${msg.room_id} > tbody`).append(
       `<tr>
-        <td>${data.message}</td>
-        <td>${data.creator}</td>
+        <td>${msg.content}</td>
+        <td>${msg.creator}</td>
+        <td>${msg.created_at}</td>
       </tr>`
-      )
-    console.log("Recieving:")
-    console.log(data)
+    )
   }
 });
-
-let submit_messages;
-$(document).on('turbolinks:load', function () {
-  submit_messages()
-})
-
-submit_messages = function () {
-  $('#message_content').on('keydown', function (event) {
-    if (event.keyCode == 13) {
-      $('input').click()
-      event.target.value = ''
-      event.preventDefault()
-    }
-  })
-}

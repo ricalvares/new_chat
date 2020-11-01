@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+%w[john joe jane zoe].each { |name| User.create(name: name) }
+ChatRoom.find_or_create_by(id: 1, title: "Entrance room; Welcome")

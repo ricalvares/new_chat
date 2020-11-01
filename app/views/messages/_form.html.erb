@@ -2,7 +2,24 @@
   <%= simple_form_for @message, remote: true do |f| %>
     <%= f.text_field :content %>
     <%= f.select :user_id, User.all.map { |r| [r.name, r.id] }%>
-    <%= f.input :chat_room_id, :as => :hidden, :input_html => { value: @chat_room.id } %>
-    <%= f.submit %>
+    <%= f.input :chat_room_id, :as => :hidden, :input_html => { value: @chat_room.id } if @chat_room %>
+    <%= f.button :submit %>
   <% end %>
+<% end %>
+
+<%= javascript_tag do %>
+  let submit_messages;
+  $(document).on('turbolinks:load', function () {
+    submit_messages()
+  })
+
+  submit_messages = function () {
+    $('#message_content').on('keydown', function (event) {
+      if (event.keyCode == 13) {
+        $('input').click()
+        event.target.value = ''
+        event.preventDefault()
+      }
+    })
+  }
 <% end %>

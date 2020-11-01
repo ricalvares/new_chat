@@ -7,6 +7,7 @@
     <tr>
       <th>user</th>
       <th>message</th>
+      <th>created at</th>
     </tr>
   </thead>
 
@@ -16,6 +17,7 @@
         <tr>
           <td><%= message.content %></td>
           <td><%= message.user.name %></td>
+          <td><%= message.created_at.iso8601 %></td>
         </tr>
       <% end %>
    <% end %>
