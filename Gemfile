@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 
-
+gem 'rubocop', require: false
 gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'simple_form'
@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -49,11 +50,11 @@ end
 
 group :test do
   gem 'factory_bot'
+  gem 'faker'
+  gem 'action-cable-testing'
   gem 'rspec-rails', '~> 4.0.1'
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
 
