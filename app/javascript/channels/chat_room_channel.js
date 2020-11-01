@@ -10,8 +10,7 @@ consumer.subscriptions.create("ChatRoomChannel", {
     // Called when the subscription has been terminated by the server
   },
 
-  received(data) {
-    const msg = data.message
+  received(msg) {
     $(`.msgs-chat-room-${msg.room_id} > tbody`).append(
       `<tr>
         <td>${msg.content}</td>

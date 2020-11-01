@@ -11,8 +11,7 @@ class CreateMessageJob < ApplicationJob
       room_id: chat_room.id,
       created_at: message.created_at
     }
-
-    ActionCable.server.broadcast 'chat_room_channel', message: data
+    ActionCable.server.broadcast 'chat_room_channel', data
   rescue ActiveRecord::RecordNotFound => e
     Rails.logger.error(">>>>>> #{e.message}")
   end
